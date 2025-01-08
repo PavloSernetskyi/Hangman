@@ -41,7 +41,11 @@ class Hangman {
     }
 
     public static void main(String[] args) {
-        Hangman game = new Hangman("example", 6);
+        String[] words = {"example", "java", "program", "object", "inheritance", "polymorphism"};
+        Random random = new Random();
+        String randomWord = words[random.nextInt(words.length)];
+
+        Hangman game = new Hangman(randomWord, 6);
         game.playGame();
     }
 }
