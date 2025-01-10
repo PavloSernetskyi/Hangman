@@ -1,6 +1,7 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
 
-class Hangman {
+public class Hangman {
     private String wordToGuess;
     private char[] guessedWord;
     private int remainingAttempts;
@@ -65,36 +66,5 @@ class Hangman {
             }
         }
         System.out.println("No more hints available.");
-    }
-
-    public static void main(String[] args) {
-        String[] easyWords = {"tree", "book", "lamp", "chair", "clock"};
-        String[] mediumWords = {"notebook", "elephant", "chocolate", "backpack", "umbrella"};
-        String[] hardWords = {"constitution", "headquarters", "transportation", "misunderstanding", "revolutionary"};
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Select difficulty level: ");
-        System.out.println("1. Easy level 4-5 letters word and 10 attempts\n2. Medium level 8-9 letters word and 8 attempts\n3. Hard level 12 letters word or more and 6 attempts\n(Press 'h' during the game for a hint.)");
-        System.out.print("Enter your choice (1/2/3): ");
-        int choice = scanner.nextInt();
-
-        String[] selectedWords;
-        int attempts;
-        if (choice == 1) {
-            selectedWords = easyWords;
-            attempts = 10;
-        } else if (choice == 2) {
-            selectedWords = mediumWords;
-            attempts = 8;
-        } else {
-            selectedWords = hardWords;
-            attempts = 6;
-        }
-
-        Random random = new Random();
-        String randomWord = selectedWords[random.nextInt(selectedWords.length)];
-
-        Hangman game = new Hangman(randomWord, attempts);
-        game.playGame();
     }
 }
