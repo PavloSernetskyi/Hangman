@@ -39,9 +39,7 @@ public class Hangman {
                 continue;
             }
 
-            char guessedChar = input.charAt(0);
-
-            if (guessedChar == 'h') {
+            if (input.equals("hint")) {
                 if (hintsUsed < MAX_HINTS) {
                     revealHint();
                     hintsUsed++;
@@ -50,7 +48,7 @@ public class Hangman {
                 }
                 continue;
             }
-
+            char guessedChar = input.charAt(0);
             boolean correctGuess = false;
             for (int i = 0; i < wordToGuess.length(); i++) {
                 if (wordToGuess.charAt(i) == guessedChar) {
@@ -68,8 +66,6 @@ public class Hangman {
                 DatabaseManager.saveGame(playerName, gameMode, remainingAttempts, hintsUsed, difficultyLevel);
                 return;
             }
-
-            remainingAttempts--; // Decrement attempts after each guess
         }
 
         System.out.println("\nGame Over. The word was: " + wordToGuess);
