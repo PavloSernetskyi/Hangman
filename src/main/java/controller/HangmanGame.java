@@ -1,8 +1,11 @@
 package controller;
 
-import service.GameSetup;
+import model.Player;
+import service.SinglePlayerGame;
+import service.MultiplayerGame;
 
-import java.util.*;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class HangmanGame {
     public static void main(String[] args) {
@@ -11,7 +14,6 @@ public class HangmanGame {
         System.out.println("1. Single Player\n2. Multiplayer");
         System.out.print("Enter your choice (1/2): ");
 
-        // initialize mode to 0. This will be used to store the user's choice 1 as single player mode and 2 as multiplayer mode.
         int mode = 0;
         while (true) {
             System.out.print("Enter your choice (1/2): ");
@@ -29,9 +31,11 @@ public class HangmanGame {
         }
 
         if (mode == 1) {
-            GameSetup.startSinglePlayerMode();
+            SinglePlayerGame singlePlayerGame = new SinglePlayerGame(new Player(""));
+            singlePlayerGame.startGame();
         } else if (mode == 2) {
-            GameSetup.startMultiplayerMode();
+            MultiplayerGame multiplayerGame = new MultiplayerGame(new Player(""), new Player(""));
+            multiplayerGame.startGame();
         }
     }
 }
