@@ -6,13 +6,13 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Hangman {
-    private String wordToGuess;
-    private char[] guessedWord;
-    private int remainingAttempts;
-    private int hintsUsed;
-    private String difficultyLevel;
-    private String playerName;
-    private String gameMode;
+    String wordToGuess;
+    char[] guessedWord;
+    int remainingAttempts;
+    int hintsUsed;
+    String difficultyLevel;
+    String playerName;
+    String gameMode;
     private static final int MAX_HINTS = 3;
 
     public Hangman(String wordToGuess, String difficultyLevel, int remainingAttempts, String playerName, String gameMode) {
@@ -26,6 +26,55 @@ public class Hangman {
         Arrays.fill(this.guessedWord, '_');
     }
 
+//    public void playGame() {
+//        Scanner scanner = new Scanner(System.in);
+//
+//        while (remainingAttempts > 0) {
+//            System.out.println("\nWord to guess: " + String.valueOf(guessedWord));
+//            System.out.println("Remaining attempts: " + remainingAttempts);
+//            System.out.println("Hints used: " + hintsUsed + "/" + MAX_HINTS);
+//            System.out.println("Remaining hints: " + (MAX_HINTS - hintsUsed));
+//            System.out.println("Press 'h' for a hint to reveal a letter.");
+//            System.out.print("Enter a letter: ");
+//            String input = scanner.nextLine().toLowerCase();
+//
+//            if (input.isEmpty()) {
+//                System.out.println("No input provided. Please enter a letter.");
+//                continue;
+//            }
+//
+//            if (input.equals("hint")) {
+//                if (hintsUsed < MAX_HINTS) {
+//                    revealHint();
+//                    hintsUsed++;
+//                } else {
+//                    System.out.println("No more hints available.");
+//                }
+//                continue;
+//            }
+//            char guessedChar = input.charAt(0);
+//            boolean correctGuess = false;
+//            for (int i = 0; i < wordToGuess.length(); i++) {
+//                if (wordToGuess.charAt(i) == guessedChar) {
+//                    guessedWord[i] = guessedChar;
+//                    correctGuess = true;
+//                }
+//            }
+//
+//            if (!correctGuess) {
+//                remainingAttempts--;
+//            }
+//
+//            if (String.valueOf(guessedWord).equals(wordToGuess)) {
+//                System.out.println("\nCongratulations! You guessed the word: " + wordToGuess);
+//                DatabaseManager.saveGame(playerName, gameMode, remainingAttempts, hintsUsed, difficultyLevel);
+//                return;
+//            }
+//        }
+//
+//        System.out.println("\nGame Over. The word was: " + wordToGuess);
+//    }
+
     public void playGame() {
         Scanner scanner = new Scanner(System.in);
 
@@ -34,7 +83,7 @@ public class Hangman {
             System.out.println("Remaining attempts: " + remainingAttempts);
             System.out.println("Hints used: " + hintsUsed + "/" + MAX_HINTS);
             System.out.println("Remaining hints: " + (MAX_HINTS - hintsUsed));
-            System.out.println("Press 'h' for a hint to reveal a letter.");
+            System.out.println("Press 'hint' for a hint to reveal a letter.");
             System.out.print("Enter a letter: ");
             String input = scanner.nextLine().toLowerCase();
 
@@ -52,18 +101,8 @@ public class Hangman {
                 }
                 continue;
             }
-            char guessedChar = input.charAt(0);
-            boolean correctGuess = false;
-            for (int i = 0; i < wordToGuess.length(); i++) {
-                if (wordToGuess.charAt(i) == guessedChar) {
-                    guessedWord[i] = guessedChar;
-                    correctGuess = true;
-                }
-            }
 
-            if (!correctGuess) {
-                remainingAttempts--;
-            }
+            playGame(input.charAt(0));
 
             if (String.valueOf(guessedWord).equals(wordToGuess)) {
                 System.out.println("\nCongratulations! You guessed the word: " + wordToGuess);
@@ -75,7 +114,21 @@ public class Hangman {
         System.out.println("\nGame Over. The word was: " + wordToGuess);
     }
 
-    private void revealHint() {
+    public void playGame(char guessedChar) {
+        boolean correctGuess = false;
+        for (int i = 0; i < wordToGuess.length(); i++) {
+            if (wordToGuess.charAt(i) == guessedChar) {
+                guessedWord[i] = guessedChar;
+                correctGuess = true;
+            }
+        }
+
+        if (!correctGuess) {
+            remainingAttempts--;
+        }
+    }
+
+    void revealHint() {
         for (int i = 0; i < guessedWord.length; i++) {
             if (guessedWord[i] == '_') {
                 guessedWord[i] = wordToGuess.charAt(i);
