@@ -1,3 +1,7 @@
+package model;
+
+import repository.DatabaseManager;
+
 import java.util.Arrays;
 import java.util.Scanner;
 

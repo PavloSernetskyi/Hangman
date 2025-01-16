@@ -1,3 +1,5 @@
+package service;
+import model.Hangman;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;

@@ -1,3 +1,7 @@
+package controller;
+
+import service.GameSetup;
+
 import java.util.*;
 
 public class HangmanGame {
